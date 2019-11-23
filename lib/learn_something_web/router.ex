@@ -17,7 +17,8 @@ defmodule LearnSomethingWeb.Router do
   scope "/", LearnSomethingWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", DashboardLive.Index
+    #get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.

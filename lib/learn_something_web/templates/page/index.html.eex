@@ -1,9 +1,0 @@
-<div>
-
-<h2>Dashboard</h2>
-
-  <div class="dashboard-input">
-    <input type="text" placeholder="http://"/>
-    <button type="submit" id="quick-add-button" class="bg-blue-dark text-white rounded-full py-2 px-4">Quick Add</button>
-  </div>
-</div>

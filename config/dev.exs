@@ -52,7 +52,8 @@ config :learn_something, LearnSomethingWeb.Endpoint,
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
       ~r{lib/learn_something_web/views/.*(ex)$},
-      ~r{lib/learn_something_web/templates/.*(eex)$}
+      ~r{lib/learn_something_web/templates/.*(eex)$},
+      ~r{lib/learn_something_web/live/.*(ex)$}
     ]
   ]
 
