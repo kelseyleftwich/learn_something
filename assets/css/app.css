@@ -47,6 +47,7 @@ section > div {
 
 #brand > img {
   max-width: 40%;
+  margin-bottom: 16px;
 }
 
 #brand > h4 {
