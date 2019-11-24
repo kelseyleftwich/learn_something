@@ -17,9 +17,9 @@ defmodule LearnSomethingWeb.UserLive.New do
     case Accounts.create_user(%Accounts.User{}, user) do
       {:ok, _user} ->
         {:noreply, live_redirect(socket, to: "/")}
+
       {:error, changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
     end
   end
-
 end

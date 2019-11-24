@@ -2,7 +2,6 @@ defmodule LearnSomething.Factory do
   # with Ecto
   use ExMachina.Ecto, repo: LearnSomething.Repo
 
-
   def user_factory do
     %LearnSomething.Accounts.User{
       name: "Jane Smith",
@@ -16,5 +15,4 @@ defmodule LearnSomething.Factory do
       href: "http://google.com"
     }
   end
-
 end

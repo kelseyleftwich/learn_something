@@ -21,20 +21,27 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
     case Links.create_link(link) do
       {:ok, link} ->
         {:noreply, assign(socket, links: [link | links])}
+
       {:error, changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
     end
   end
 
-  def handle_event("click_card", %{"selected-id" => selected_id}, %Socket{assigns: %{links: links}} = socket) do
-    selected = Enum.find(links, fn(link) ->
-      "#{link.id}" == selected_id
-    end)
+  def handle_event(
+        "click_card",
+        %{"selected-id" => selected_id},
+        %Socket{assigns: %{links: links}} = socket
+      ) do
+    selected =
+      Enum.find(links, fn link ->
+        "#{link.id}" == selected_id
+      end)
+
     {:noreply, assign(socket, selected: selected)}
   end
 
   defp fetch(socket) do
     links = Links.list_links()
-    assign(socket, [links: links, selected: Enum.at(links,0)])
+    assign(socket, links: links, selected: Enum.at(links, 0))
   end
 end

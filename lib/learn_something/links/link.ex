@@ -18,5 +18,4 @@ defmodule LearnSomething.Links.Link do
     |> cast(attrs, [:href, :title])
     |> validate_required([:href, :title])
   end
-
 end

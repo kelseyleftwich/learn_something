@@ -1,5 +1,4 @@
 defmodule LearnSomething.LinkTest do
-
   use LearnSomething.DataCase
   alias LearnSomething.Links.Link
 
@@ -33,5 +32,4 @@ defmodule LearnSomething.LinkTest do
       assert Enum.member?(links, link2)
     end
   end
-
 end

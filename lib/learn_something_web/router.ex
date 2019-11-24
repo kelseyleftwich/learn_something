@@ -19,7 +19,7 @@ defmodule LearnSomethingWeb.Router do
 
     live "/", DashboardLive.Index
     live "/register", UserLive.New
-    #get "/", PageController, :index
+    # get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
