@@ -13,10 +13,12 @@ defmodule LearnSomethingWeb.UserLive.New do
     UserView.render("new_user.html", assigns)
   end
 
-  def handle_event("add", %{"user" => user}, %Socket{assigns: %{changeset: changeset}} = socket) do
+  def handle_event("add", %{"user" => user}, socket) do
     case Accounts.create_user(%Accounts.User{}, user) do
-      {:ok, user} -> {:noreply, socket}
-      {:error, changeset} -> {:noreply, assign(socket, changeset: changeset)}
+      {:ok, _user} ->
+        {:noreply, live_redirect(socket, to: "/")}
+      {:error, changeset} ->
+        {:noreply, assign(socket, changeset: changeset)}
     end
   end
 
