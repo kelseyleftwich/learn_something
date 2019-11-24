@@ -18,6 +18,7 @@ defmodule LearnSomethingWeb.Router do
     pipe_through :browser
 
     live "/", DashboardLive.Index
+    live "/register", UserLive.New
     #get "/", PageController, :index
   end
 

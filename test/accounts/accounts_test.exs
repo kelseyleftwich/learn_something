@@ -46,5 +46,10 @@ defmodule LearnSomething.AccountsTest do
 
       assert user1 == retrieved_user
     end
+
+    test "create_user/2" do
+      %User{}
+      |> LearnSomething.Accounts.create_user(%{name: "Jill", email: "jill@email.com"})
+    end
   end
 end

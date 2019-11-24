@@ -9,4 +9,10 @@ defmodule LearnSomething.Accounts do
   def list_users() do
     Repo.all(User)
   end
+
+  def create_user(user, attrs) do
+    user
+    |> User.changeset(attrs)
+    |> Repo.insert()
+  end
 end
