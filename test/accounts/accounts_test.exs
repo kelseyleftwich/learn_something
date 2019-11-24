@@ -28,5 +28,23 @@ defmodule LearnSomething.AccountsTest do
       } = %User{}
       |> User.changeset(%{email: "billbob.com", name: "Bill"})
     end
+
+    test "list_users/0" do
+      user1 = insert(:user, name: "Jane")
+      user2 = insert(:user, name: "Jack")
+
+      users = LearnSomething.Accounts.list_users()
+
+      assert Enum.member?(users, user1)
+      assert Enum.member?(users, user2)
+    end
+
+    test "get_user/1" do
+      user1 = insert(:user, name: "Jane")
+
+      retrieved_user = LearnSomething.Accounts.get_user(user1.id)
+
+      assert user1 == retrieved_user
+    end
   end
 end

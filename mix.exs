@@ -44,7 +44,8 @@ defmodule LearnSomething.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_live_view, "~> 0.4.0"},
-      {:floki, ">= 0.0.0", only: :test}
+      {:floki, ">= 0.0.0", only: :test},
+      {:ex_machina, "~> 2.3", only: :test}
     ]
   end
 

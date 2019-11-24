@@ -18,9 +18,19 @@ defmodule LearnSomething.LinkTest do
       refute cs.valid?
     end
 
-    test "create link" do
+    test "create link/1" do
       assert {:ok, _link} = LearnSomething.Links.create_link(%{href: "http://", title: "hello"})
       assert {:error, %Ecto.Changeset{}} = LearnSomething.Links.create_link(%{href: "http://"})
+    end
+
+    test "list_links/1" do
+      link1 = insert(:link)
+      link2 = insert(:link)
+
+      links = LearnSomething.Links.list_links()
+
+      assert Enum.member?(links, link1)
+      assert Enum.member?(links, link2)
     end
   end
 

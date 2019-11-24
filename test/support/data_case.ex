@@ -22,6 +22,7 @@ defmodule LearnSomething.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import LearnSomething.DataCase
+      import LearnSomething.Factory
     end
   end
 
