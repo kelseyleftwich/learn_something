@@ -8,18 +8,28 @@ defmodule LearnSomethingWeb.Router do
     plug Phoenix.LiveView.Flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+
   end
 
   pipeline :api do
     plug :accepts, ["json"]
   end
 
+  pipeline :logged_in do
+    plug LearnSomething.AuthenticationPlug
+  end
+
   scope "/", LearnSomethingWeb do
     pipe_through :browser
 
-    live "/", DashboardLive.Index
-    live "/register", UserLive.New
-    # get "/", PageController, :index
+    get "/login", LoginController, :index
+    post "/login", LoginController, :login
+  end
+
+  scope "/", LearnSomethingWeb do
+    pipe_through [:browser, :logged_in]
+
+    live "/", DashboardLive.Index, session: [:current_user]
   end
 
   # Other scopes may use custom stacks.

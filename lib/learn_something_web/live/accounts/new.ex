@@ -3,8 +3,6 @@ defmodule LearnSomethingWeb.UserLive.New do
   alias LearnSomethingWeb.UserView
   alias LearnSomething.Accounts
 
-  alias Phoenix.LiveView.Socket
-
   def mount(_session, socket) do
     {:ok, assign(socket, changeset: Accounts.User.changeset(%Accounts.User{}, %{}))}
   end

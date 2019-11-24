@@ -37,7 +37,7 @@ defmodule LearnSomething.AccountsTest do
       user1 = insert(:user, name: "Jane")
       user2 = insert(:user, name: "Jack")
 
-      users = LearnSomething.Accounts.list_users()
+      users = LearnSomething.UserStore.list_users()
 
       assert Enum.member?(users, user1)
       assert Enum.member?(users, user2)
@@ -46,14 +46,14 @@ defmodule LearnSomething.AccountsTest do
     test "get_user/1" do
       user1 = insert(:user, name: "Jane")
 
-      retrieved_user = LearnSomething.Accounts.get_user(user1.id)
+      retrieved_user = LearnSomething.UserStore.get_user(user1.id)
 
       assert user1 == retrieved_user
     end
 
     test "create_user/2" do
       %User{}
-      |> LearnSomething.Accounts.create_user(%{name: "Jill", email: "jill@email.com"})
+      |> LearnSomething.UserStore.create_user(%{name: "Jill", email: "jill@email.com"})
     end
   end
 end
