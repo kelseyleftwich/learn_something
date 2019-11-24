@@ -20,7 +20,7 @@ defmodule LearnSomethingWeb.Router do
   end
 
   scope "/", LearnSomethingWeb do
-    pipe_through :browser
+    pipe_through [:browser, :logged_in]
 
     get "/login", LoginController, :index
     post "/login", LoginController, :login
@@ -29,7 +29,7 @@ defmodule LearnSomethingWeb.Router do
   scope "/", LearnSomethingWeb do
     pipe_through [:browser, :logged_in]
 
-    live "/", DashboardLive.Index, session: [:current_user]
+    live "/", DashboardLive.Index, session: [:user_id]
   end
 
   # Other scopes may use custom stacks.

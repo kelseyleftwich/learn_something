@@ -5,8 +5,8 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
 
   alias Phoenix.LiveView.Socket
 
-  def mount(_session, socket) do
-    {:ok, fetch(assign(socket, changeset: Links.Link.changeset(%Links.Link{}, %{})))}
+  def mount(session, socket) do
+    {:ok, fetch(assign(socket, [user_id: session.user_id, changeset: Links.Link.changeset(%Links.Link{}, %{})]))}
   end
 
   def render(assigns) do
@@ -16,9 +16,10 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
   def handle_event(
         "add",
         %{"link" => link},
-        %Socket{assigns: %{links: links}} = socket
+        %Socket{assigns: %{links: links, user_id: user_id}} = socket
       ) do
-    case Links.create_link(link) do
+    attrs = Map.put(link, "user_id", user_id)
+    case Links.create_link(attrs) do
       {:ok, link} ->
         {:noreply, assign(socket, links: [link | links])}
 

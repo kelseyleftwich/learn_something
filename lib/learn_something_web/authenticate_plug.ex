@@ -15,7 +15,9 @@ defmodule LearnSomething.AuthenticationPlug do
   def call(conn, _) do
     with {:ok, id} <- fetch_session_key(conn),
          user <- fetch_user(id) do
-      assign(conn, :id, user.id)
+      conn
+      |> put_session(:user_id, user.id)
+      |> assign(:id, user.id)
     else
       _ -> error(conn)
     end

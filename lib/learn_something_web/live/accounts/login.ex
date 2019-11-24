@@ -22,8 +22,7 @@ defmodule LearnSomethingWeb.UserLive.Login do
     %Ecto.Changeset{} = changeset
     case Accounts.authenticate(changeset) do
       %Accounts.User{} = user ->
-
-        {:noreply, live_redirect(assign(socket, current_user: user), to: "/")}
+        {:noreply, live_redirect(assign(socket, user_id: user.id), to: "/")}
       changeset ->
         {:noreply, assign(socket, changeset: changeset)}
     end

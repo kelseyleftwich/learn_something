@@ -10,12 +10,15 @@ defmodule LearnSomething.Links.Link do
     field :href, :string
     field :title, :string
 
+    belongs_to :user, LearnSomething.Accounts.User
+
     timestamps()
   end
 
   def changeset(link, attrs) do
     link
-    |> cast(attrs, [:href, :title])
-    |> validate_required([:href, :title])
+    |> cast(attrs, [:href, :title, :user_id])
+    |> validate_required([:href, :title, :user_id])
+    |> assoc_constraint(:user)
   end
 end
