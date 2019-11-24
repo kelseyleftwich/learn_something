@@ -10,7 +10,6 @@ defmodule LearnSomethingWeb.LoginController do
   @spec login(Plug.Conn.t(), map) :: Plug.Conn.t()
   def login(conn, %{"email" => email}) do
     with %User{} = user <- LearnSomething.Accounts.authenticate(%{email: email}) do
-      #IO.inspect(user)
       conn
       |> put_user(user)
       |> redirect(to: "/")

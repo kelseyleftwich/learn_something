@@ -13,11 +13,6 @@ defmodule LearnSomething.AuthenticationPlug do
 
   @impl Plug
   def call(conn, _) do
-
-    {:ok, id} = fetch_session_key(conn)
-    fetch_user(id)
-    |> IO.inspect
-
     with {:ok, id} <- fetch_session_key(conn),
          user <- fetch_user(id) do
       assign(conn, :id, user.id)
