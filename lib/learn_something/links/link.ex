@@ -8,15 +8,15 @@ defmodule LearnSomething.Links.Link do
 
   schema "links" do
     field :href, :string
-    field :tldr, :string
+    field :title, :string
 
     timestamps()
   end
 
   def changeset(link, attrs) do
     link
-    |> cast(attrs, [:href, :tldr])
-    |> validate_required([:href, :tldr])
+    |> cast(attrs, [:href, :title])
+    |> validate_required([:href, :title])
   end
 
 end
