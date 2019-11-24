@@ -1,37 +1,37 @@
-<div>
-
-    <h2>Dashboard</h2>
-
-  <div class="my-8">
-    <%= f = form_for @changeset, "#", [phx_submit: "add"] %>
-        <div style="display: grid; grid-template-columns: max-content max-content max-content; grid-gap: 12px; align-items: center">
+<div style="display: flex; flex-direction: column; flex:1;" >
         <div>
-            Address
+            <%= f = form_for @changeset, "#", [phx_submit: "add"] %>
+                <div style="display: grid; grid-template-columns: repeat(2,minmax(30%, max-content)) max-content; grid-gap: 12px; align-items: center">
+                <div>
+                <%= text_input f, :href, placeholder: "http://", class: "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" %>
+                </div>
+                <div>
+                <%= text_input f, :title, placeholder: "title", class: "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" %>
+                </div>
+                <div>
+                    <%= submit "+", phx_disable_with: "Adding...", class: "bg-blue-dark text-white rounded-full py-2 px-4" %>
+                </div>
+                <div>
+                <%= error_tag f, :href %>
+                </div>
+                <div>
+                <%= error_tag f, :title %>
+                </div>
+                </div>
+            </form>
         </div>
-        <div>
-            Title
-        </div>
-        <div></div>
-        <div>
-        <%= text_input f, :href, placeholder: "http://", class: "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" %>
-        </div>
-        <div>
-        <%= text_input f, :title, placeholder: "title", class: "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" %>
-        </div>
-        <div>
-            <%= submit "+", phx_disable_with: "Adding...", class: "bg-blue-dark text-white rounded-full py-2 px-4" %>
-        </div>
-        <div>
-        <%= error_tag f, :href %>
-        </div>
-        <div>
-        <%= error_tag f, :title %>
+<hr/>
+    <div style="display: grid; grid-template-columns: 1fr 3fr; grid-gap: 24px; flex: 1;" class="pt-6">
+        <div style="position: relative;">
+        <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: auto;">
+            
+            <%= for link <- @links do %>
+                <div class="mb-8 shadow bg-white px-4 py-8" phx-click="click_card" phx-value-selected-id="<%=link.id %>"><%= link.title %></div>
+            <% end %>
         </div>
         </div>
-    </form>
-  </div>
-
-    <%= for link <- @links do %>
-        <div class="my-4"><a href="<%= link.href %>"><%= link.title %></a></div>
-    <% end %>
+        <div class="shadow bg-white p-8">
+            <h2><%= @selected.title %></h2>
+        </div>
+    </div>
 </div>

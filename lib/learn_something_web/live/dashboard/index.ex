@@ -26,7 +26,15 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
     end
   end
 
+  def handle_event("click_card", %{"selected-id" => selected_id}, %Socket{assigns: %{links: links}} = socket) do
+    selected = Enum.find(links, fn(link) ->
+      "#{link.id}" == selected_id
+    end)
+    {:noreply, assign(socket, selected: selected)}
+  end
+
   defp fetch(socket) do
-    assign(socket, links: Links.list_links())
+    links = Links.list_links()
+    assign(socket, [links: links, selected: Enum.at(links,0)])
   end
 end
