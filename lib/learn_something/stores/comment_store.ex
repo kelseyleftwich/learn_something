@@ -3,8 +3,8 @@ defmodule LearnSomething.CommentStore do
   alias LearnSomething.Links.Comment
   import Ecto.Query
 
-  def create_comment(comment, attrs) do
-    comment
+  def create_comment(attrs) do
+    %Comment{}
     |> Comment.changeset(attrs)
     |> Repo.insert()
   end

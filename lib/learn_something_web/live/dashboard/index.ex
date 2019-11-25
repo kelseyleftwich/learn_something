@@ -10,7 +10,8 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
      fetch(
        assign(socket,
          user_id: session.user_id,
-         changeset: Links.Link.changeset(%Links.Link{}, %{})
+         changeset: Links.Link.changeset(%Links.Link{}, %{}),
+         comment_changeset: Links.Comment.changeset(%Links.Comment{}, %{})
        )
      )}
   end
@@ -36,13 +37,33 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
   end
 
   def handle_event(
+    "add_comment",
+    %{"comment" => comment},
+    %Socket{assigns: %{comment_changeset: changeset, user_id: user_id, selected: selected}} = socket
+  ) do
+    attrs =
+      comment
+      |> Map.put("user_id", user_id)
+      |> Map.put("link_id", selected.id)
+
+    case Links.create_comment(attrs) do
+      %Links.Comment{} = comment ->
+        IO.inspect(comment)
+        {:noreply, socket}
+      {:error, changeset} ->
+        IO.inspect(changeset)
+        {:noreply, assign(socket, comment_changeset: changeset)}
+    end
+
+  end
+
+  def handle_event(
         "click_card",
         %{"selected-id" => selected_id},
         socket
       ) do
     selected =
       LearnSomething.LinkStore.get_link(selected_id)
-      |> IO.inspect()
 
     {:noreply, assign(socket, selected: selected)}
   end

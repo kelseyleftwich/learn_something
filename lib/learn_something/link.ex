@@ -3,11 +3,11 @@ defmodule LearnSomething.Links do
   Context for links
   """
 
-  alias LearnSomething.Links.Link
-
   def create_link(attrs) do
-    %Link{}
-    |> Link.changeset(attrs)
-    |> LearnSomething.Repo.insert()
+    LearnSomething.LinkStore.create_link(attrs)
+  end
+
+  def create_comment(changeset) do
+    LearnSomething.CommentStore.create_comment(changeset)
   end
 end
