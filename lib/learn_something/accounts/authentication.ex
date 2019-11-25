@@ -16,7 +16,7 @@ defmodule LearnSomething.Accounts.Authentication do
   end
 
   defp validate_user(changeset) do
-    validate_change(changeset, :email, fn (_current_field, value) ->
+    validate_change(changeset, :email, fn _current_field, value ->
       case LearnSomething.Repo.get_by(User, email: value) do
         nil -> [{:email, "Invalid login"}]
         _ -> []

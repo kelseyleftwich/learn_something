@@ -4,10 +4,7 @@ defmodule LearnSomething.LinkStore do
   import Ecto.Query
 
   def get_link(id) do
-
-
     Repo.get(LearnSomething.Links.Link, id)
-
     |> Repo.preload([:user])
   end
 
@@ -16,6 +13,5 @@ defmodule LearnSomething.LinkStore do
 
     Repo.all(query)
     |> Repo.preload([:user])
-
   end
 end

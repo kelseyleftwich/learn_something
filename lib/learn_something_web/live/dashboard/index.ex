@@ -6,7 +6,13 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
   alias Phoenix.LiveView.Socket
 
   def mount(session, socket) do
-    {:ok, fetch(assign(socket, [user_id: session.user_id, changeset: Links.Link.changeset(%Links.Link{}, %{})]))}
+    {:ok,
+     fetch(
+       assign(socket,
+         user_id: session.user_id,
+         changeset: Links.Link.changeset(%Links.Link{}, %{})
+       )
+     )}
   end
 
   def render(assigns) do
@@ -19,6 +25,7 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
         %Socket{assigns: %{links: links, user_id: user_id}} = socket
       ) do
     attrs = Map.put(link, "user_id", user_id)
+
     case Links.create_link(attrs) do
       {:ok, link} ->
         {:noreply, assign(socket, links: [link | links])}
@@ -31,7 +38,7 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
   def handle_event(
         "click_card",
         %{"selected-id" => selected_id},
-        %Socket{assigns: %{links: links}} = socket
+        socket
       ) do
     selected =
       LearnSomething.LinkStore.get_link(selected_id)
@@ -42,6 +49,7 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
 
   defp fetch(socket) do
     links = LearnSomething.LinkStore.list_links()
+
     assign(socket, links: links, selected: LearnSomething.LinkStore.get_link(Enum.at(links, 0).id))
   end
 end

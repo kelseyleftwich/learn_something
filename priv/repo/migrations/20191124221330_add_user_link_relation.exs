@@ -11,9 +11,9 @@ defmodule LearnSomething.Repo.Migrations.AddUserLinkRelation do
 
     query =
       from(user in "users",
-      where: user.email == "kelsey.leftwich@gmail.com",
-      select: user.id
-    )
+        where: user.email == "kelsey.leftwich@gmail.com",
+        select: user.id
+      )
 
     user_id = LearnSomething.Repo.one(query)
 

@@ -15,14 +15,16 @@ defmodule LearnSomethingWeb.UserLive.Login do
   end
 
   def handle_event(
-    "authenticate",
-    _,
-    %Socket{assigns: %{changeset: changeset}} = socket)
-  do
+        "authenticate",
+        _,
+        %Socket{assigns: %{changeset: changeset}} = socket
+      ) do
     %Ecto.Changeset{} = changeset
+
     case Accounts.authenticate(changeset) do
       %Accounts.User{} = user ->
         {:noreply, live_redirect(assign(socket, user_id: user.id), to: "/")}
+
       changeset ->
         {:noreply, assign(socket, changeset: changeset)}
     end
