@@ -4,7 +4,8 @@ defmodule LearnSomething.LinkTest do
 
   describe "link" do
     test "changeset with href and title is valid" do
-      cs = %Link{} |> Link.changeset(%{href: "http://google.com", title: "A search engine"})
+      user = insert(:user)
+      cs = %Link{} |> Link.changeset(%{href: "http://google.com", title: "A search engine", user_id: user.id})
 
       assert cs.valid?
     end
@@ -18,7 +19,8 @@ defmodule LearnSomething.LinkTest do
     end
 
     test "create link/1" do
-      assert {:ok, _link} = LearnSomething.Links.create_link(%{href: "http://", title: "hello"})
+      user = insert(:user)
+      assert {:ok, _link} = LearnSomething.Links.create_link(%{href: "http://", title: "hello", user_id: user.id})
       assert {:error, %Ecto.Changeset{}} = LearnSomething.Links.create_link(%{href: "http://"})
     end
 
@@ -30,6 +32,12 @@ defmodule LearnSomething.LinkTest do
 
       assert Enum.member?(links, link1)
       assert Enum.member?(links, link2)
+    end
+
+    test "get_link/1" do
+      link = insert(:link)
+
+      assert link = LearnSomething.LinkStore.get_link(link.id)
     end
   end
 end

@@ -12,7 +12,8 @@ defmodule LearnSomething.Factory do
   def link_factory do
     %LearnSomething.Links.Link{
       title: "Google - a handy search engine",
-      href: "http://google.com"
+      href: "http://google.com",
+      user: build(:user)
     }
   end
 end
