@@ -34,15 +34,14 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
         %Socket{assigns: %{links: links}} = socket
       ) do
     selected =
-      Enum.find(links, fn link ->
-        "#{link.id}" == selected_id
-      end)
+      LearnSomething.LinkStore.get_link(selected_id)
+      |> IO.inspect()
 
     {:noreply, assign(socket, selected: selected)}
   end
 
   defp fetch(socket) do
-    links = Links.list_links()
-    assign(socket, links: links, selected: Enum.at(links, 0))
+    links = LearnSomething.LinkStore.list_links()
+    assign(socket, links: links, selected: LearnSomething.LinkStore.get_link(Enum.at(links, 0).id))
   end
 end

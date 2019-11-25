@@ -32,6 +32,7 @@
         </div>
         <div class="shadow bg-white p-8">
             <h2><%= @selected.title %></h2>
+            <small>Added by <%= @selected.user.name %> on <%= @selected.inserted_at.year %>/<%= @selected.inserted_at.month %>/<%= @selected.inserted_at.day %></small>
         </div>
     </div>
 </div>

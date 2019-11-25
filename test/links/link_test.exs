@@ -26,7 +26,7 @@ defmodule LearnSomething.LinkTest do
       link1 = insert(:link)
       link2 = insert(:link)
 
-      links = LearnSomething.Links.list_links()
+      links = LearnSomething.LinkStore.list_links()
 
       assert Enum.member?(links, link1)
       assert Enum.member?(links, link2)

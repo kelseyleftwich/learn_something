@@ -5,10 +5,6 @@ defmodule LearnSomething.Links do
 
   alias LearnSomething.Links.Link
 
-  def list_links() do
-    LearnSomething.Repo.all(Link)
-  end
-
   def create_link(attrs) do
     %Link{}
     |> Link.changeset(attrs)
