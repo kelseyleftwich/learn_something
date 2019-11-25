@@ -7,7 +7,7 @@ defmodule LearnSomething.Links.Link do
   import Ecto.Changeset
 
   schema "links" do
-    field :href, :string
+    field :href, :string, unique: true
     field :title, :string
 
     belongs_to :user, LearnSomething.Accounts.User
@@ -20,5 +20,6 @@ defmodule LearnSomething.Links.Link do
     |> cast(attrs, [:href, :title, :user_id])
     |> validate_required([:href, :title, :user_id])
     |> assoc_constraint(:user)
+    |> unique_constraint(:href, name: "links_href_index")
   end
 end
