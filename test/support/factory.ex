@@ -16,4 +16,12 @@ defmodule LearnSomething.Factory do
       user: build(:user)
     }
   end
+
+  def comment_factory do
+    %LearnSomething.Links.Comment{
+      text: "Cool!",
+      user: build(:user),
+      link: build(:link)
+    }
+  end
 end

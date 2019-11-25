@@ -11,6 +11,7 @@ defmodule LearnSomething.Links.Link do
     field :title, :string
 
     belongs_to :user, LearnSomething.Accounts.User
+    has_many :comments, LearnSomething.Links.Comment
 
     timestamps()
   end

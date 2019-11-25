@@ -25,8 +25,8 @@ defmodule LearnSomething.LinkTest do
     end
 
     test "list_links/1" do
-      link1 = insert(:link)
-      link2 = insert(:link)
+      link1 = insert(:link, href: "google.com")
+      link2 = insert(:link, href: "bing.com")
 
       links = LearnSomething.LinkStore.list_links()
 

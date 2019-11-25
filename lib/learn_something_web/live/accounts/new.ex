@@ -12,7 +12,7 @@ defmodule LearnSomethingWeb.UserLive.New do
   end
 
   def handle_event("add", %{"user" => user}, socket) do
-    case Accounts.create_user(%Accounts.User{}, user) do
+    case LearnSomething.UserStore.create_user(%Accounts.User{}, user) do
       {:ok, _user} ->
         {:noreply, live_redirect(socket, to: "/")}
 

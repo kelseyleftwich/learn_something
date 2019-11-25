@@ -12,6 +12,6 @@ defmodule LearnSomething.LinkStore do
     query = from l in Link, order_by: [desc: l.inserted_at]
 
     Repo.all(query)
-    |> Repo.preload([:user])
+    |> Repo.preload([:user, :comments])
   end
 end
