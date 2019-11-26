@@ -42,7 +42,7 @@ defmodule LearnSomething.CommentTest do
       user = insert(:user)
       link = insert(:link)
 
-      CommentStore.create_comment(%Comment{}, %{text: "Cool!", user_id: user.id, link_id: link.id})
+      CommentStore.create_comment(%{text: "Cool!", user_id: user.id, link_id: link.id})
     end
 
     test "get_comments_for_link" do

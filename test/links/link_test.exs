@@ -1,6 +1,7 @@
 defmodule LearnSomething.LinkTest do
   use LearnSomething.DataCase
   alias LearnSomething.Links.Link
+  alias LearnSomething.LinkStore
 
   describe "link" do
     test "changeset with href and title is valid" do
@@ -28,16 +29,23 @@ defmodule LearnSomething.LinkTest do
       link1 = insert(:link, href: "google.com")
       link2 = insert(:link, href: "bing.com")
 
-      links = LearnSomething.LinkStore.list_links()
+      links = LinkStore.list_links()
 
-      assert Enum.member?(links, link1)
-      assert Enum.member?(links, link2)
+      ids = Enum.map(links, fn l -> l.id end)
+
+
+      assert Enum.member?(ids, link1.id)
+      assert Enum.member?(ids, link2.id)
     end
 
     test "get_link/1" do
       link = insert(:link)
 
-      assert link = LearnSomething.LinkStore.get_link(link.id)
+      assert link = LinkStore.get_link(link.id)
+    end
+
+    test "create_link/1" do
+
     end
   end
 end
