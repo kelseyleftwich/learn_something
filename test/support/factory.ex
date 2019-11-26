@@ -24,4 +24,11 @@ defmodule LearnSomething.Factory do
       link: build(:link)
     }
   end
+
+  def tag_factory do
+    %LearnSomething.Links.Tag{
+      text: "Elixir",
+      creator: build(:user)
+    }
+  end
 end
