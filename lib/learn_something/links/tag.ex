@@ -11,6 +11,8 @@ defmodule LearnSomething.Links.Tag do
 
     belongs_to :creator, LearnSomething.Accounts.User
 
+    many_to_many(:links, LearnSomething.Links.Link, join_through: "links_tags")
+
     timestamps()
   end
 

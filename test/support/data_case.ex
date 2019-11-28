@@ -23,6 +23,7 @@ defmodule LearnSomething.DataCase do
       import Ecto.Query
       import LearnSomething.DataCase
       import LearnSomething.Factory
+      import Assertions
     end
   end
 

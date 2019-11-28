@@ -45,7 +45,8 @@ defmodule LearnSomething.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_live_view, "~> 0.4.0"},
       {:floki, ">= 0.0.0", only: :test},
-      {:ex_machina, "~> 2.3", only: :test}
+      {:ex_machina, "~> 2.3", only: :test},
+      {:assertions, "~> 0.14.1", ony: [:test]}
     ]
   end
 

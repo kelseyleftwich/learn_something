@@ -11,9 +11,10 @@ defmodule LearnSomething.Factory do
 
   def link_factory do
     %LearnSomething.Links.Link{
-      title: "Google - a handy search engine",
-      href: "http://google.com",
-      user: build(:user)
+      title: sequence(:title, &"Resource Title #{&1}"),
+      href: sequence(:href, &"http://website.com/#{&1}"),
+      user: build(:user),
+      tags: []
     }
   end
 
@@ -27,7 +28,7 @@ defmodule LearnSomething.Factory do
 
   def tag_factory do
     %LearnSomething.Links.Tag{
-      text: "Elixir",
+      text: sequence("Tag"),
       creator: build(:user)
     }
   end

@@ -13,6 +13,8 @@ defmodule LearnSomething.Links.Link do
     belongs_to :user, LearnSomething.Accounts.User
     has_many :comments, LearnSomething.Links.Comment
 
+    many_to_many(:tags, LearnSomething.Links.Tag, join_through: "links_tags")
+
     timestamps()
   end
 
@@ -22,5 +24,11 @@ defmodule LearnSomething.Links.Link do
     |> validate_required([:href, :title, :user_id])
     |> assoc_constraint(:user)
     |> unique_constraint(:href, name: "links_href_index")
+  end
+
+  def add_tag_changeset(link, %LearnSomething.Links.Tag{} = tag) do
+    link
+    |> Ecto.Changeset.change()
+    |> put_assoc(:tags, [tag | link.tags])
   end
 end

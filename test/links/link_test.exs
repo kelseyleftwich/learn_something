@@ -44,8 +44,16 @@ defmodule LearnSomething.LinkTest do
       assert link = LinkStore.get_link(link.id)
     end
 
-    test "create_link/1" do
+    test "add_tag_to_link/2" do
+      link = insert(:link)
+      tag1 = insert(:tag)
+      tag2 = insert(:tag)
 
+      {:ok, link} = LearnSomething.Links.add_tag_to_link(link, tag1)
+
+      assert_struct_in_list(tag1, link.tags, [:id])
+
+      assert length(link.tags) == 1
     end
   end
 end

@@ -20,6 +20,7 @@ defmodule LearnSomethingWeb.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
       alias LearnSomethingWeb.Router.Helpers, as: Routes
+      import Assertions
 
       # The default endpoint for testing
       @endpoint LearnSomethingWeb.Endpoint
