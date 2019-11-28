@@ -64,6 +64,10 @@ input:focus {
   grid-area: cardtitle;
 }
 
+h1 {
+  @apply text-2xl mb-8;
+}
+
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans&display=swap');
