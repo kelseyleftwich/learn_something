@@ -1,0 +1,15 @@
+<div class="absolute inset-0" style="background-color: rgba(0,0,0,0.25)">
+    <div class="absolute" style="left: 50%; top: 25%;">
+        <div class="absolute shadow-2xl bg-white border border-gray-400 p-8 rounded" style="left: -50%;">
+            <h3 class="text-center">New Tag</h3>
+            <%= f = form_for @tag_changeset, "#", [phx_submit: "create_tag"] %>
+                <%= text_input f, :text, placeholder: "Elixir", class: "my-6" %>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 8px">
+
+                <button class="circle-button-outlined w-full" phx-click="toggle-tag-modal">Cancel</button>
+                <%= submit "Add", class: "circle-button w-full" %>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>

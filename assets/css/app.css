@@ -1,67 +1,49 @@
-/** assets/css/app.css */
-/**
- * This injects Tailwind's base styles, which is a combination of
- * Normalize.css and some additional base styles.
- *
- * You can see the styles here:
- * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
- *
- * If using `postcss-import`, use this import instead:
- *
- * @import "tailwindcss/preflight";
- */
- @tailwind base;
- /**
-  * This injects any component classes registered by plugins.
-  *
-  * If using `postcss-import`, use this import instead:
-  *
-  * @import "tailwindcss/components";
-  */
- @tailwind components;
- /**
-  * Here you would add any of your custom component classes; stuff that you'd
-  * want loaded *before* the utilities so that the utilities could still
-  * override them.
-  *
-  * Example:
-  *
-  * .btn { ... }
-  * .form-input { ... }
-  *
-  * Or if using a preprocessor or `postcss-import`:
-  *
-  * @import "components/buttons";
-  * @import "components/forms";
-  */
- /**
-  * This injects all of Tailwind's utility classes, generated based on your
-  * config file.
-  *
-  * If using `postcss-import`, use this import instead:
-  *
-  * @import "tailwindcss/utilities";
-  */
- @tailwind utilities;
- /**
-  * Here you would add any custom utilities you need that don't come out of the
-  * box with Tailwind.
-  *
-  * Example :
-  *
-  * .bg-pattern-graph-paper { ... }
-  * .skew-45 { ... }
-  *
-  * Or if using a preprocessor or `postcss-import`:
-  *
-  * @import "utilities/background-patterns";
-  * @import "utilities/skew-transforms";
-  */
+
+@tailwind base;
+ 
+@tailwind components;
+
+input {
+  @apply appearance-none border-b py-2 px-3 text-gray-700 leading-tight;
+}
+
+input:focus {
+  @apply outline-none shadow-outline;
+}
+
+.circle-button {
+  @apply bg-indigo-700 text-white rounded-full py-2 px-4;
+}
+
+.circle-button-outlined {
+  @apply border border-indigo-700 text-indigo-700 rounded-full py-2 px-4;
+}
+
+.chip {
+  @apply rounded-full inline-block px-2;
+}
+
+.chip-outlined {
+  @apply border border-indigo-700 text-indigo-700 ;
+}
+
+.chip-filled {
+  @apply bg-indigo-700 text-white ;
+}
+  
+.chip > div {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  grid-gap: 4px
+}
+
+@tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans&display=swap');
 
 body {
-  background-color: #1c3d5a;
+  @apply bg-indigo-900;
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   display: grid;
@@ -133,7 +115,7 @@ section > div {
 main {
   grid-area: main;
   background-color: #f1f5f8;
-  border-radius: 32px 0 0 32px;
+  border-radius: 32px 0 0 0;
   padding: 40px;
   display: flex;
   flex-direction: column;

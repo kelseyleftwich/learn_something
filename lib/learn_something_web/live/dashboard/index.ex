@@ -11,7 +11,11 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
        assign(socket,
          user_id: session.user_id,
          changeset: Links.Link.changeset(%Links.Link{}, %{}),
-         comment_changeset: Links.Comment.changeset(%Links.Comment{}, %{})
+         comment_changeset: Links.Comment.changeset(%Links.Comment{}, %{}),
+         tags: LearnSomething.TagStore.list_tags(),
+         select_tags_open: false,
+         modal_open: false,
+         tag_changeset: Links.Tag.changeset(%Links.Tag{}, %{})
        )
      )}
   end
@@ -39,7 +43,7 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
   def handle_event(
     "add_comment",
     %{"comment" => comment},
-    %Socket{assigns: %{comment_changeset: changeset, user_id: user_id, selected: selected}} = socket
+    %Socket{assigns: %{user_id: user_id, selected: selected}} = socket
   ) do
     attrs =
       comment
@@ -66,6 +70,44 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
       LearnSomething.LinkStore.get_link(selected_id)
 
     {:noreply, assign(socket, selected: selected)}
+  end
+
+  def handle_event("toggle_select_tags", _, %Socket{assigns: %{select_tags_open: select_tags_open}} = socket) do
+    {:noreply, assign(socket, select_tags_open: !select_tags_open)}
+  end
+
+  def handle_event("add_tag_to_link", %{"tag-id" => tag_id},
+  %Socket{assigns: %{selected: selected}} = socket) do
+    tag = LearnSomething.TagStore.get(tag_id)
+
+    {:ok, selected} =
+      selected
+      |> Links.add_tag_to_link(tag)
+
+    {:noreply, assign(socket, selected: selected)}
+  end
+
+  def handle_event("toggle-tag-modal", _, %Socket{assigns: %{modal_open: modal_open}} = socket) do
+    {:noreply, assign(socket, modal_open: !modal_open)}
+  end
+
+  def handle_event(
+        "create_tag",
+        %{"tag" => tag},
+        %Socket{assigns: %{tags: tags, selected: selected, user_id: user_id}} = socket
+      ) do
+    attrs = Map.put(tag, "creator_id", user_id)
+
+    case LearnSomething.TagStore.create_tag(attrs) do
+      {:ok, tag} ->
+        {:ok, selected} =
+          selected
+          |> Links.add_tag_to_link(tag)
+        {:noreply, assign(socket, tags: [tag | tags], selected: selected, modal_open: false )}
+
+      {:error, changeset} ->
+        {:noreply, assign(socket, tag_changeset: changeset)}
+    end
   end
 
   defp fetch(socket) do

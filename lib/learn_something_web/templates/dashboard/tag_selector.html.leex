@@ -1,3 +1,32 @@
-<div>
-    <input type="text"/>
+<div class="my-6">
+    <%= for link_tag <- Enum.sort(@link.tags, fn a, b -> a.text < b.text end) do %>
+        <button class="chip chip-filled"><%= link_tag.text %></button>
+    <% end %>
+
+    <%= if @select_tags_open do %>
+        <%= for tag <- Enum.sort(@tags, fn a, b -> a.text < b.text end) do %>
+            <%= if not Enum.member?(@link.tags, tag) do %>
+            <button phx-click="add_tag_to_link" phx-value-tag-id="<%= tag.id %>" class="chip chip-outlined"><%= tag.text %></button>
+            <% end %>
+        <% end %>
+
+        <button class="chip chip-outlined border-red-500 text-red-600" phx-click="toggle-tag-modal">Create Tag</button>
+
+        <button class="chip bg-gray-600 text-white" phx-click="toggle_select_tags">
+            <div>
+                <img src="/images/delete-white.svg" style="max-height: 12px"/>
+                <span>Close</span>
+            </div>
+        </button>
+    <% else %>
+    <button alt="Add tag" class="chip  bg-red-500 text-white" phx-click="toggle_select_tags">
+        +
+    </button>
+    <% end %>
+
+    <%= if @modal_open do %>
+        <%= render("tag_modal.html",
+            tag_changeset: @tag_changeset
+        ) %>
+    <% end %>
 </div>
