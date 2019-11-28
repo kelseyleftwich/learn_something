@@ -1,0 +1,22 @@
+ <div class="shadow bg-white p-8">
+    <h2><%= @link.title %></h2>
+    <div class="my-4">
+        <small>Added by <%= @link.user.name %> on <%= @link.inserted_at.year %>/<%= @link.inserted_at.month %>/<%= @link.inserted_at.day %></small>
+    </div>
+    <%= render("tag_selector.html") %>
+    <%= f = form_for @comment_changeset, "#", [phx_submit: "add_comment"] %>
+        <div style="display: grid; grid-template-columns: 1fr min-content; grid-gap: 8px">
+            <%= text_input f, :text, placeholder: "Comment", class: "shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" %>
+            <%= submit "+", phx_disable_with: "Adding...", class: "bg-blue-dark text-white rounded-full py-2 px-4" %>
+        </div>
+    </form>
+
+    <%= for comment <- @link.comments do %>
+        <div class="py-8 border-b">
+            <p class="mb-4">
+                <%= comment.text %>
+            </p>
+            <small><%= comment.user.name %> <%= comment.inserted_at %></small>
+        </div>
+    <% end %>
+</div>
