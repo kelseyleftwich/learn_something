@@ -17,9 +17,9 @@
 
         <div id="sidebar-links">
           <ul>
-            <li>Home</li>
-            <li>Repo</li>
-            <li>Settings</li>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/tags">Tags</a></li>
+            <li>Bookmarks</li>
           </ul>
         </div>
       
