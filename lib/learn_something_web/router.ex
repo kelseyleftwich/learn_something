@@ -29,6 +29,7 @@ defmodule LearnSomethingWeb.Router do
     pipe_through [:browser, :logged_in]
 
     live "/", DashboardLive.Index, session: [:user_id]
+    live "/tags", TagsLive.Index, session: [:user_id]
   end
 
   # Other scopes may use custom stacks.

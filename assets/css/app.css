@@ -38,6 +38,32 @@ input:focus {
   grid-gap: 4px
 }
 
+.tag-card {
+  @apply rounded;
+  @apply p-4;
+  @apply shadow;
+  display: grid;
+  grid-template-areas: 
+    "cardtitle subscribe"
+    "count count";
+  justify-content: space-between;
+  row-gap: 32px;
+}
+
+.subscribe {
+  grid-area: subscribe;
+}
+
+.count {
+  grid-area: count;
+  opacity: 0.8;
+}
+
+.cardtitle {
+  @apply text-lg;
+  grid-area: cardtitle;
+}
+
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans&display=swap');

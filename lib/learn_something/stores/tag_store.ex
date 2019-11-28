@@ -18,5 +18,6 @@ defmodule LearnSomething.TagStore do
 
   def list_tags() do
     Repo.all(Tag)
+    |> Repo.preload([:links])
   end
 end
