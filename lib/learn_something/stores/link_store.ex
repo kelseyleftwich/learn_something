@@ -26,4 +26,13 @@ defmodule LearnSomething.LinkStore do
     |> Link.add_tag_changeset(tag)
     |> LearnSomething.Repo.update()
   end
+
+  def get_by_tag(tag_id) do
+    query = from l in Link,
+      join: lt in "links_tags", on: l.id == lt.link_id,
+      where: lt.tag_id == ^tag_id
+
+    Repo.all(query)
+    |> Repo.preload([:user, :tags, comments: [:user]])
+  end
 end
