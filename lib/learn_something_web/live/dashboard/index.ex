@@ -5,7 +5,11 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
 
   alias Phoenix.LiveView.Socket
 
+  @topic "links"
+
   def mount(session, socket) do
+    LearnSomethingWeb.Endpoint.subscribe(@topic)
+
     {:ok,
      fetch(
        assign(socket,
@@ -15,7 +19,8 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
          tags: LearnSomething.TagStore.list_tags(),
          select_tags_open: false,
          modal_open: false,
-         tag_changeset: Links.Tag.changeset(%Links.Tag{}, %{})
+         tag_changeset: Links.Tag.changeset(%Links.Tag{}, %{}),
+         alert_text: nil
        )
      )}
   end
@@ -33,6 +38,9 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
 
     case Links.create_link(attrs) do
       {:ok, link} ->
+        link = link |> LearnSomething.Repo.preload([:user])
+        LearnSomethingWeb.Endpoint.broadcast_from(self(), @topic, "link_created", link)
+        send(self(), link)
         {:noreply, assign(socket, links: [link | links])}
 
       {:error, changeset} ->
@@ -108,6 +116,15 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
       {:error, changeset} ->
         {:noreply, assign(socket, tag_changeset: changeset)}
     end
+  end
+
+  def handle_info(%LearnSomething.Links.Link{} = link, socket) do
+    {:noreply, assign(socket, alert_text: "\"#{link.title}\" added by #{link.user.name}")}
+  end
+
+  def handle_info(%Phoenix.Socket.Broadcast{topic: @topic, event: "link_created", payload: link},
+  %Socket{assigns: %{links: links}} = socket) do
+    {:noreply, assign(socket,links: [link | links], alert_text: "\"#{link.title}\" added by #{link.user.name}")}
   end
 
   defp fetch(socket) do

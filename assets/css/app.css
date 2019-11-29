@@ -106,6 +106,19 @@ h1 {
   @apply mb-8;
 }
 
+.alert {
+  @apply rounded;
+  @apply bg-white;
+  @apply shadow;
+  @apply border;
+  @apply border-gray-400;
+  @apply p-4;
+  @apply text-sm;
+  position: absolute;
+  left: -50%;
+  white-space: nowrap;
+}
+
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans&display=swap');
