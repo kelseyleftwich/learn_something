@@ -166,6 +166,10 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
     end
   end
 
+  def handle_params(_params, _uri, socket) do
+    {:noreply, socket}
+  end
+
   defp fetch(socket) do
     links = LearnSomething.LinkStore.list_links()
 

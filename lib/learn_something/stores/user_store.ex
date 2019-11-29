@@ -4,6 +4,7 @@ defmodule LearnSomething.UserStore do
 
   def get_user(id) do
     Repo.get(User, id)
+    |> Repo.preload([:tag_subscriptions])
   end
 
   def list_users() do
@@ -19,6 +20,12 @@ defmodule LearnSomething.UserStore do
   def add_tag_to_subscriptions(user, tag) do
     user
     |> User.add_tag_subscription_changeset(tag)
+    |> LearnSomething.Repo.update()
+  end
+
+  def remove_tag_from_subscriptions(user, tag) do
+    user
+    |> User.remove_tag_subscription_changeset(tag)
     |> LearnSomething.Repo.update()
   end
 end

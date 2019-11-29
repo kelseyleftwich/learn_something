@@ -7,7 +7,15 @@
             <div class="cardtitle">
                 <a href="/tags/<%= tag.id %>"><%= tag.text %></a>
             </div>
-            <div class="subscribe"> <img src="/images/star-line-white.svg" style="height: 18px"/></div>
+                <%= if tag.subscribed do %>
+                    <button class="subscribe" phx-click="unsubscribe_from_tag" phx-value-tag-id="<%= tag.id %>">
+                        <img src="/images/star-filled-white.svg" style="height: 18px"/>
+                    </button>
+                <% else %>
+                    <button class="subscribe" phx-click="subscribe_to_tag" phx-value-tag-id="<%= tag.id %>">
+                        <img src="/images/star-line-white.svg" style="height: 18px"/>
+                    </button>
+                <% end %>
             <div class="count"><a href="/links/<%= tag.id %>"><%= length(tag.links) %> links</a></div>
         </div>
         

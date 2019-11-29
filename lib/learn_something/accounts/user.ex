@@ -2,13 +2,14 @@ defmodule LearnSomething.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias LearnSomething.Links.Tag
+
   schema "users" do
     field :email, :string
     field :name, :string
 
     many_to_many(:tag_subscriptions, LearnSomething.Links.Tag,
-      join_through: LearnSomething.Accounts.TagSubscription
-    )
+      join_through: LearnSomething.Accounts.TagSubscription, on_replace: :delete)
 
     timestamps()
   end
@@ -22,11 +23,21 @@ defmodule LearnSomething.Accounts.User do
     |> validate_format(:email, ~r/@/)
   end
 
-  def add_tag_subscription_changeset(user, %LearnSomething.Links.Tag{} = tag) do
+  def add_tag_subscription_changeset(user, %Tag{} = tag) do
     user
     |> Ecto.Changeset.change()
     |> put_assoc(:tag_subscriptions, [tag | user.tag_subscriptions])
     |> unique_tag_subscriptions_constraint(user, tag)
+  end
+
+  def remove_tag_subscription_changeset(user, %Tag{} = tag) do
+    filtered_tags =
+      user.tag_subscriptions
+      |> Enum.filter(fn t -> t.id != tag.id end)
+
+    user
+    |> Ecto.Changeset.change()
+    |> put_assoc(:tag_subscriptions, filtered_tags)
   end
 
   def unique_tag_subscriptions_constraint(changeset, user, tag) do
