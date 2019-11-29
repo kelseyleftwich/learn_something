@@ -10,7 +10,8 @@ defmodule LearnSomething.Repo.Migrations.AddTagLinkXrefTable do
       add :tag_id, references(:tags, on_delete: :delete_all),
         primary_key: true,
         null: false
-      end
-      create unique_index(:links_tags, [:link_id, :tag_id])
+    end
+
+    create unique_index(:links_tags, [:link_id, :tag_id])
   end
 end

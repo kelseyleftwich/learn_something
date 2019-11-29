@@ -20,7 +20,5 @@ defmodule LearnSomething.Links.Tag do
     tag
     |> cast(attrs, [:text, :creator_id])
     |> validate_required([:text, :creator_id])
-
   end
-
 end

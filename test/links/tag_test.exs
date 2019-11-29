@@ -44,10 +44,8 @@ defmodule LearnSomething.TagTest do
 
       ids = Enum.map(tags, fn t -> t.id end)
 
-
       assert Enum.member?(ids, tag1.id)
       assert Enum.member?(ids, tag2.id)
     end
-
   end
 end

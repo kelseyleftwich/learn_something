@@ -58,5 +58,4 @@ defmodule LearnSomething.CommentTest do
       assert Enum.member?(ids, comment2.id)
     end
   end
-
 end

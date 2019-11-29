@@ -49,10 +49,10 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
   end
 
   def handle_event(
-    "add_comment",
-    %{"comment" => comment},
-    %Socket{assigns: %{user_id: user_id, selected: selected}} = socket
-  ) do
+        "add_comment",
+        %{"comment" => comment},
+        %Socket{assigns: %{user_id: user_id, selected: selected}} = socket
+      ) do
     attrs =
       comment
       |> Map.put("user_id", user_id)
@@ -62,11 +62,11 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
       %Links.Comment{} = comment ->
         IO.inspect(comment)
         {:noreply, socket}
+
       {:error, changeset} ->
         IO.inspect(changeset)
         {:noreply, assign(socket, comment_changeset: changeset)}
     end
-
   end
 
   def handle_event(
@@ -74,18 +74,24 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
         %{"selected-id" => selected_id},
         socket
       ) do
-    selected =
-      LearnSomething.LinkStore.get_link(selected_id)
+    selected = LearnSomething.LinkStore.get_link(selected_id)
 
     {:noreply, assign(socket, selected: selected)}
   end
 
-  def handle_event("toggle_select_tags", _, %Socket{assigns: %{select_tags_open: select_tags_open}} = socket) do
+  def handle_event(
+        "toggle_select_tags",
+        _,
+        %Socket{assigns: %{select_tags_open: select_tags_open}} = socket
+      ) do
     {:noreply, assign(socket, select_tags_open: !select_tags_open)}
   end
 
-  def handle_event("add_tag_to_link", %{"tag-id" => tag_id},
-  %Socket{assigns: %{selected: selected}} = socket) do
+  def handle_event(
+        "add_tag_to_link",
+        %{"tag-id" => tag_id},
+        %Socket{assigns: %{selected: selected}} = socket
+      ) do
     tag = LearnSomething.TagStore.get(tag_id)
 
     {:ok, selected} =
@@ -111,7 +117,8 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
         {:ok, selected} =
           selected
           |> Links.add_tag_to_link(tag)
-        {:noreply, assign(socket, tags: [tag | tags], selected: selected, modal_open: false )}
+
+        {:noreply, assign(socket, tags: [tag | tags], selected: selected, modal_open: false)}
 
       {:error, changeset} ->
         {:noreply, assign(socket, tag_changeset: changeset)}
@@ -122,9 +129,15 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
     {:noreply, assign(socket, alert_text: "\"#{link.title}\" added by #{link.user.name}")}
   end
 
-  def handle_info(%Phoenix.Socket.Broadcast{topic: @topic, event: "link_created", payload: link},
-  %Socket{assigns: %{links: links}} = socket) do
-    {:noreply, assign(socket,links: [link | links], alert_text: "\"#{link.title}\" added by #{link.user.name}")}
+  def handle_info(
+        %Phoenix.Socket.Broadcast{topic: @topic, event: "link_created", payload: link},
+        %Socket{assigns: %{links: links}} = socket
+      ) do
+    {:noreply,
+     assign(socket,
+       links: [link | links],
+       alert_text: "\"#{link.title}\" added by #{link.user.name}"
+     )}
   end
 
   defp fetch(socket) do

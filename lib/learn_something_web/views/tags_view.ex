@@ -14,7 +14,8 @@ defmodule LearnSomethingWeb.TagsView do
       "bg-orange-500"
     ]
 
-    Enum.at(colors,
+    Enum.at(
+      colors,
       rem(
         index + 1,
         length(colors)
