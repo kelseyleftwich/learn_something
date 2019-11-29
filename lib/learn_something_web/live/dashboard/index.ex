@@ -125,6 +125,10 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
     end
   end
 
+  def handle_event("dismiss_alert", _, socket) do
+    {:noreply, assign(socket, alert: %{message: nil, link: nil})}
+  end
+
   def handle_info(%LearnSomething.Links.Link{} = link, socket) do
     {:noreply, assign(socket, alert: %{message: "\"#{link.title}\" added by #{link.user.name}", link: link})}
   end
@@ -140,9 +144,7 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
      )}
   end
 
-  def handle_event("dismiss_alert", _, socket) do
-    {:noreply, assign(socket, alert: %{message: nil, link: nil})}
-  end
+
 
   defp fetch(socket) do
     links = LearnSomething.LinkStore.list_links()
