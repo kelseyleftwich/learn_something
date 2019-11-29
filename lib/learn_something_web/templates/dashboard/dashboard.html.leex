@@ -28,7 +28,7 @@
         <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: auto;">
             
             <%= for link <- @links do %>
-                <div class="mb-8 shadow bg-white px-4 py-8" phx-click="click_card" phx-value-selected-id="<%=link.id %>"><%= link.title %></div>
+                <button class="link-card w-full text-left" phx-click="click_card" phx-value-selected-id="<%=link.id %>"><%= link.title %></button>
             <% end %>
         </div>
         </div>

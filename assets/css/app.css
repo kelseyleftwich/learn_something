@@ -57,6 +57,33 @@ input:focus {
   transform: scale(1.02);
 }
 
+.link-card {
+  @apply mb-8 shadow bg-white px-4 py-8;
+  transform: perspective(1px) translateZ(0);
+  transition-duration: 0.3s;
+  transition-property: transform;
+  position: relative;
+  overflow: hidden;
+}
+
+.link-card:before {
+  @apply bg-indigo-700;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  transform: translateY(4px);
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.link-card:hover:before, .link-card:focus:before {
+  transform: translateY(0);
+}
+
 .subscribe {
   grid-area: subscribe;
 }
