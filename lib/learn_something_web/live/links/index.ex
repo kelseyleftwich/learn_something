@@ -59,9 +59,9 @@ defmodule LearnSomethingWeb.LinksLive.Index do
       |> Map.put("link_id", selected.id)
 
     case Links.create_comment(attrs) do
-      %Links.Comment{} = comment ->
-        IO.inspect(comment)
-        {:noreply, socket}
+      {:ok, %Links.Comment{}} ->
+        selected = LearnSomething.LinkStore.get_link(selected.id)
+        {:noreply, assign(socket, selected: selected)}
 
       {:error, changeset} ->
         IO.inspect(changeset)
