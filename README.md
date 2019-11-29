@@ -1,6 +1,9 @@
 # LearnSomething
 
-![screenshot](./screenshot.png)
+![screenshot dashboard](./screenshot-1.png)
+
+
+![screenshot tags](./screenshot-2.png)
 
 AI, Bookmark Icons made by Smashicons (https://www.flaticon.com/authors/smashicons) from www.flaticon.com
 
