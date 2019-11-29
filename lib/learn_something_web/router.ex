@@ -29,7 +29,8 @@ defmodule LearnSomethingWeb.Router do
     pipe_through [:browser, :logged_in]
 
     live "/", DashboardLive.Index, session: [:user_id]
-    live "/links/:tag_id", DashboardLive.Index, session: [:user_id]
+    live "/links", LinksLive.Index, session: [:user_id]
+    live "/links/:tag_id", LinksLive.Index, session: [:user_id]
     live "/tags", TagsLive.Index, session: [:user_id]
     live "/tags/:id", TagsLive.Show, session: [:user_id]
   end

@@ -18,6 +18,7 @@
         <div id="sidebar-links">
           <ul>
             <a href="/"><li>Dashboard</li></a>
+            <a href="/links"><li>Links</li></a>
             <a href="/tags"><li>Tags</li></a>
             <li>Bookmarks</li>
           </ul>
