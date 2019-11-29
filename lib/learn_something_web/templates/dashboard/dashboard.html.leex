@@ -43,8 +43,4 @@
     </div>
 </div>
 
-<%= if @alert_text do %>
-    <div class="absolute" style="left: 50%; top: 16px; min-height: 10px; background-color: green;">
-        <div class="alert"><%= @alert_text %><button class="ml-8 chip bg-gray-200 text-gray-500" >Dismiss</button></div>
-    </div>
-<% end %>
+<%= render("alert_dialog.html", alert_text: @alert_text) %>

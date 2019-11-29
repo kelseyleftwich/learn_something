@@ -140,6 +140,10 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
      )}
   end
 
+  def handle_event("dismiss_alert", _, socket) do
+    {:noreply, assign(socket, alert_text: nil)}
+  end
+
   defp fetch(socket) do
     links = LearnSomething.LinkStore.list_links()
 
