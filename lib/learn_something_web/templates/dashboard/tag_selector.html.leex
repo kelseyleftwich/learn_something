@@ -1,6 +1,6 @@
 <div class="my-6">
     <%= for link_tag <- Enum.sort(@link.tags, fn a, b -> a.text < b.text end) do %>
-        <button class="chip chip-filled"><%= link_tag.text %></button>
+        <a class="chip chip-filled" href="/tags/<%= link_tag.id %>"><%= link_tag.text %></a>
     <% end %>
 
     <%= if @select_tags_open do %>
