@@ -11,6 +11,8 @@ defmodule LearnSomething.Accounts.User do
     many_to_many(:tag_subscriptions, LearnSomething.Links.Tag,
       join_through: LearnSomething.Accounts.TagSubscription, on_replace: :delete)
 
+    has_many(:links, LearnSomething.Links.Link)
+
     timestamps()
   end
 

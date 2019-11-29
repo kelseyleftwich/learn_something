@@ -4,7 +4,7 @@ defmodule LearnSomething.UserStore do
 
   def get_user(id) do
     Repo.get(User, id)
-    |> Repo.preload([:tag_subscriptions])
+    |> Repo.preload([:tag_subscriptions, :links])
   end
 
   def list_users() do

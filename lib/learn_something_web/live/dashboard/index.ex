@@ -15,7 +15,8 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
        assign(socket,
          user_id: session.user_id,
          user: LearnSomething.UserStore.get_user(session.user_id),
-         alert: %{message: nil, link: nil}
+         alert: %{message: nil, link: nil},
+         links: LearnSomething.LinkStore.list_links()
        )
      }
   end

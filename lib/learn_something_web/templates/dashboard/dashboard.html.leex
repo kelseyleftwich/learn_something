@@ -3,4 +3,61 @@
     <span class="font-hairline">Hello, </span><span class="font-bold"><%= @user.name %>!</span>
 </p>
 
+<div
+    class="my-8"
+    style="display: grid; grid-template-columns: repeat(4,1fr); grid-gap: 16px">
+    <div class="card dashboard-card text-white <%= color(1) %> text-white">
+        <span class="text-5xl">
+            <%= length(links_added_within_7_days(@links)) %>
+        </span>
+        <span class="uppercase">
+        Links<br/>
+        Added This Week
+        </span>
+    </div>
+    <a href="/links">
+        <div class="card dashboard-card text-white <%= color(2) %> text-white">
+            <span class="text-5xl">
+                <%= length(@links) %>
+            </span>
+            <span class="uppercase">
+            Links
+            </span>
+        </div>
+    </a>
+</div>
+
+<h2 class="text-2xl">Your Statistics</h2>
+<div
+    class="my-8"
+    style="display: grid; grid-template-columns: repeat(4,1fr); grid-gap: 16px">
+    <div class="card dashboard-card text-white <%= color(3) %> text-white">
+        <span class="text-5xl">
+            <%= length(links_added_within_7_days(@user.links)) %>
+        </span>
+        <span class="uppercase">
+        Links<br/>
+        Added This Week
+        </span>
+    </div>
+    <div class="card dashboard-card text-white <%= color(4) %> text-white">
+        <span class="text-5xl">
+            <%= length(@user.links) %>
+        </span>
+        <span class="uppercase">
+        Links
+        </span>
+    </div>
+    <div class="card dashboard-card text-white <%= color(5) %> text-white">
+        <span class="text-5xl">
+            <%= length(@user.tag_subscriptions) %>
+        </span>
+        <span class="uppercase">
+        Tags<br/>
+        Followed
+        </span>
+    </div>
+    
+</div>
+
 <%= render("alert_dialog.html", alert: @alert) %>

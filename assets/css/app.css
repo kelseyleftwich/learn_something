@@ -38,6 +38,23 @@ input:focus {
   grid-gap: 4px
 }
 
+.card {
+  @apply rounded;
+  @apply p-4;
+  @apply shadow;
+}
+
+.dashboard-card {
+  display: grid;
+  grid-template-columns: min-content auto;
+  align-items: center;
+  grid-gap: 8px;
+}
+
+.dashboard-card > span:first-of-type {
+  text-align: right
+}
+
 .tag-card {
   @apply rounded;
   @apply p-4;
