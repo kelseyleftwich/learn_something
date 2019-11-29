@@ -15,4 +15,10 @@ defmodule LearnSomething.UserStore do
     |> User.changeset(attrs)
     |> Repo.insert()
   end
+
+  def add_tag_to_subscriptions(user, tag) do
+    user
+    |> User.add_tag_subscription_changeset(tag)
+    |> LearnSomething.Repo.update()
+  end
 end

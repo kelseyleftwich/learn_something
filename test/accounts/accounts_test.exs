@@ -39,8 +39,8 @@ defmodule LearnSomething.AccountsTest do
 
       users = LearnSomething.UserStore.list_users()
 
-      assert Enum.member?(users, user1)
-      assert Enum.member?(users, user2)
+      assert_struct_in_list(user1, users, [:id])
+      assert_struct_in_list(user2, users, [:id])
     end
 
     test "get_user/1" do
@@ -48,7 +48,7 @@ defmodule LearnSomething.AccountsTest do
 
       retrieved_user = LearnSomething.UserStore.get_user(user1.id)
 
-      assert user1 == retrieved_user
+      assert user1.id == retrieved_user.id
     end
 
     test "create_user/2" do

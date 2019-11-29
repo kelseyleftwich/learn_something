@@ -48,4 +48,24 @@ defmodule LearnSomething.TagTest do
       assert Enum.member?(ids, tag2.id)
     end
   end
+
+  describe "Tag Subscription" do
+    test "subscribe_to_tag/2" do
+      user = insert(:user)
+      tag = insert(:tag)
+      user = LearnSomething.Accounts.subscribe_to_tag(user, tag)
+
+      assert_struct_in_list(tag, user.tag_subscriptions, [:id])
+
+      assert length(user.tag_subscriptions) == 1
+    end
+
+    test "subscribe_to_tag/2 can only subscribe to tag once" do
+      tag = insert(:tag)
+      user = insert(:user, tag_subscriptions: [tag])
+
+      {:error, %Ecto.Changeset{errors: [tag_subscriptions: {"already subscribed to tag", []}]}} = LearnSomething.Accounts.subscribe_to_tag(user, tag)
+
+    end
+  end
 end

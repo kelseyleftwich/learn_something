@@ -5,7 +5,8 @@ defmodule LearnSomething.Factory do
   def user_factory do
     %LearnSomething.Accounts.User{
       name: "Jane Smith",
-      email: sequence(:email, &"email-#{&1}@example.com")
+      email: sequence(:email, &"email-#{&1}@example.com"),
+      tag_subscriptions: []
     }
   end
 

@@ -1,8 +1,6 @@
 defmodule LearnSomethingWeb.TagsView do
   use LearnSomethingWeb, :view
 
-  alias LearnSomethingWeb.TagsLive
-
   def color(index) do
     colors = [
       "bg-red-500",

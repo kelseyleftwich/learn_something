@@ -56,7 +56,7 @@ defmodule LearnSomething.LinkTest do
     test "add_tag_to_link/2" do
       link = insert(:link)
       tag1 = insert(:tag)
-      tag2 = insert(:tag)
+      insert(:tag) # another tag we won't associate with the link
 
       {:ok, link} = LearnSomething.Links.add_tag_to_link(link, tag1)
 
