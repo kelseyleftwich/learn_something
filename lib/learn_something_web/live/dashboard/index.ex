@@ -20,7 +20,7 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
          select_tags_open: false,
          modal_open: false,
          tag_changeset: Links.Tag.changeset(%Links.Tag{}, %{}),
-         alert_text: nil
+         alert: %{message: nil, link: nil}
        )
      )}
   end
@@ -126,7 +126,7 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
   end
 
   def handle_info(%LearnSomething.Links.Link{} = link, socket) do
-    {:noreply, assign(socket, alert_text: "\"#{link.title}\" added by #{link.user.name}")}
+    {:noreply, assign(socket, alert: %{message: "\"#{link.title}\" added by #{link.user.name}", link: link})}
   end
 
   def handle_info(
@@ -136,12 +136,12 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
     {:noreply,
      assign(socket,
        links: [link | links],
-       alert_text: "\"#{link.title}\" added by #{link.user.name}"
+       alert: %{message: "\"#{link.title}\" added by #{link.user.name}", link: link}
      )}
   end
 
   def handle_event("dismiss_alert", _, socket) do
-    {:noreply, assign(socket, alert_text: nil)}
+    {:noreply, assign(socket, alert: %{message: nil, link: nil})}
   end
 
   defp fetch(socket) do
