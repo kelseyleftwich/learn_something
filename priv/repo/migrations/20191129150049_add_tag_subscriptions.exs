@@ -8,5 +8,8 @@ defmodule LearnSomething.Repo.Migrations.AddTagSubscriptions do
 
       timestamps()
     end
+
+    create index("tag_subscriptions", [:tag_id, :user_id], unique: true, name: "sub_tags_id_user_id_index")
+
   end
 end
