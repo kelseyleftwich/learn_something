@@ -5,8 +5,9 @@ defmodule LearnSomethingWeb.TagsLive.Index do
 
   def mount(session, socket) do
     tags =
-      LearnSomething.TagStore.list_tags() |> sort_tags()
+      LearnSomething.TagStore.list_tags()
       |> Enum.map(fn tag -> add_subscribed_field(tag, session.user_id) end)
+      |> sort_tags()
 
     {:ok, assign(socket, user_id: session.user_id, tags: tags)}
   end
@@ -16,7 +17,9 @@ defmodule LearnSomethingWeb.TagsLive.Index do
   end
 
   def sort_tags(tags) do
-    tags |> Enum.sort(fn a, b -> a.text < b.text end)
+    tags
+      |> Enum.sort(fn a, b -> a.text > b.text end)
+      |> Enum.sort(fn a, b -> a.subscribed > b.subscribed end)
   end
 
   def handle_event(
