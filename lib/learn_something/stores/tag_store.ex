@@ -6,6 +6,8 @@ defmodule LearnSomething.TagStore do
   alias LearnSomething.Links.Tag
   alias LearnSomething.Repo
 
+  import Ecto.Query
+
   def get(id) do
     Repo.get(Tag, id)
   end

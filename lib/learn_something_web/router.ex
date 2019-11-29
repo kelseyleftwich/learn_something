@@ -30,7 +30,7 @@ defmodule LearnSomethingWeb.Router do
 
     live "/", DashboardLive.Index, session: [:user_id]
     live "/tags", TagsLive.Index, session: [:user_id]
-    live "/tags/:tag_text", TagsLive.Show, session: [:user_id]
+    live "/tags/:id", TagsLive.Show, session: [:user_id]
   end
 
   # Other scopes may use custom stacks.
