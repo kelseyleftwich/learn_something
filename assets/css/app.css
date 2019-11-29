@@ -47,7 +47,14 @@ input:focus {
     "cardtitle subscribe"
     "count count";
   justify-content: space-between;
-  row-gap: 32px;
+  row-gap: 48px;
+  transform: perspective(1px) translateZ(0);
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+.tag-card:hover {
+  transform: scale(1.02);
 }
 
 .subscribe {
@@ -65,7 +72,11 @@ input:focus {
 }
 
 h1 {
-  @apply text-2xl mb-8;
+  @apply text-2xl;
+}
+
+.page-header {
+  @apply mb-8;
 }
 
 @tailwind utilities;
@@ -133,7 +144,7 @@ section > div {
   padding: 0;
 }
 
-#sidebar-links > ul > li {
+#sidebar-links > ul  li {
   display: block;
   padding: 10px;
   text-align: center;
