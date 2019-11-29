@@ -144,11 +144,34 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
      )}
   end
 
+  def handle_params(%{"tag_id" => tag_id}, _uri, socket) do
+    id =
+      case Integer.parse(tag_id) do
+        {id, ""} ->
+          id
+        _ ->
+          nil
+      end
+
+    with false <- is_nil(id),
+         %LearnSomething.Links.Tag{} = tag <- LearnSomething.TagStore.get(id) do
+      links = LearnSomething.LinkStore.get_by_tag(id)
+      selected_id = Enum.at(links, 0).id
+      selected = LearnSomething.LinkStore.get_link(selected_id)
+      {:noreply, assign(socket, tag: tag, links: links, selected: selected)}
+    else
+      _ -> {:noreply, socket}
+    end
+  end
+
 
 
   defp fetch(socket) do
     links = LearnSomething.LinkStore.list_links()
 
-    assign(socket, links: links, selected: LearnSomething.LinkStore.get_link(Enum.at(links, 0).id))
+    selected_id = Enum.at(links, 0).id
+    selected = LearnSomething.LinkStore.get_link(selected_id)
+
+    assign(socket, links: links, selected: selected)
   end
 end

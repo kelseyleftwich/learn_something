@@ -2,12 +2,14 @@
 
 <div style="display: grid; grid-template-columns: repeat(5,1fr); grid-gap: 32px;">
     <%= for {tag, i} <- Enum.with_index(@tags) do %>
+        
         <div class="tag-card text-white <%= color(i) %> ">
             <div class="cardtitle">
-                <%= tag.text %>
+                <a href="/tags/<%= tag.id %>"><%= tag.text %></a>
             </div>
             <div class="subscribe"> <img src="/images/star-line-white.svg" style="height: 18px"/></div>
-            <div class="count"><%= length(tag.links) %> links</div>
+            <div class="count"><a href="/links/<%= tag.id %>"><%= length(tag.links) %> links</a></div>
         </div>
+        
     <% end %>
 </div>
