@@ -2,8 +2,6 @@ defmodule LearnSomethingWeb.TagsLive.Index do
   use Phoenix.LiveView
   alias LearnSomethingWeb.TagsView
 
-  alias Phoenix.LiveView.Socket
-
   def mount(session, socket) do
     tags = LearnSomething.TagStore.list_tags() |> sort_tags()
     {:ok, assign(socket, user_id: session.user_id, tags: tags)}
