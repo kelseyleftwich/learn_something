@@ -130,7 +130,8 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
   end
 
   def handle_info(%LearnSomething.Links.Link{} = link, socket) do
-    {:noreply, assign(socket, alert: %{message: "\"#{link.title}\" added by #{link.user.name}", link: link})}
+    {:noreply,
+     assign(socket, alert: %{message: "\"#{link.title}\" added by #{link.user.name}", link: link})}
   end
 
   def handle_info(
@@ -149,6 +150,7 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
       case Integer.parse(tag_id) do
         {id, ""} ->
           id
+
         _ ->
           nil
       end
@@ -163,8 +165,6 @@ defmodule LearnSomethingWeb.DashboardLive.Index do
       _ -> {:noreply, socket}
     end
   end
-
-
 
   defp fetch(socket) do
     links = LearnSomething.LinkStore.list_links()

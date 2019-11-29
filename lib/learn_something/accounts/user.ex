@@ -5,7 +5,10 @@ defmodule LearnSomething.Accounts.User do
   schema "users" do
     field :email, :string
     field :name, :string
-    many_to_many(:tag_subscriptions, LearnSomething.Links.Tag, join_through: LearnSomething.Accounts.TagSubscription)
+
+    many_to_many(:tag_subscriptions, LearnSomething.Links.Tag,
+      join_through: LearnSomething.Accounts.TagSubscription
+    )
 
     timestamps()
   end
@@ -28,13 +31,14 @@ defmodule LearnSomething.Accounts.User do
 
   def unique_tag_subscriptions_constraint(changeset, user, tag) do
     subscription_tag_ids = Enum.map(user.tag_subscriptions, fn t -> t.id end)
+
     case Enum.member?(subscription_tag_ids, tag.id) do
       true ->
         changeset
         |> add_error(:tag_subscriptions, "already subscribed to tag")
+
       false ->
         changeset
-
     end
   end
 end

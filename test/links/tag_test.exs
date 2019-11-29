@@ -64,8 +64,8 @@ defmodule LearnSomething.TagTest do
       tag = insert(:tag)
       user = insert(:user, tag_subscriptions: [tag])
 
-      {:error, %Ecto.Changeset{errors: [tag_subscriptions: {"already subscribed to tag", []}]}} = LearnSomething.Accounts.subscribe_to_tag(user, tag)
-
+      {:error, %Ecto.Changeset{errors: [tag_subscriptions: {"already subscribed to tag", []}]}} =
+        LearnSomething.Accounts.subscribe_to_tag(user, tag)
     end
   end
 end

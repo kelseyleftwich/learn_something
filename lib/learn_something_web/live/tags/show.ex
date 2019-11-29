@@ -16,6 +16,7 @@ defmodule LearnSomethingWeb.TagsLive.Show do
       case Integer.parse(id) do
         {id, ""} ->
           id
+
         _ ->
           nil
       end

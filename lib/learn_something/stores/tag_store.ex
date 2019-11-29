@@ -6,7 +6,6 @@ defmodule LearnSomething.TagStore do
   alias LearnSomething.Links.Tag
   alias LearnSomething.Repo
 
-
   def get(id) do
     Repo.get(Tag, id)
   end

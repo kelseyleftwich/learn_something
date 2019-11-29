@@ -11,9 +11,9 @@ defmodule LearnSomething.Accounts do
       {:ok, user} ->
         user
         |> Repo.preload([:tag_subscriptions])
+
       {:error, changeset} ->
         {:error, changeset}
     end
-
   end
 end
